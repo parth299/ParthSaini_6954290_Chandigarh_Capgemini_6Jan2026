@@ -1,0 +1,62 @@
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+arm/
+arm64/
+
+## Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+.nuget/packages/
+packages/
+
+## Logs
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+## Test results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+## Publish output
+publish/
+wwwroot/lib/
+
+## Secrets (VERY IMPORTANT)
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## Environment files
+.env
+.env.*
+
+## Rider
+*.sln.iml
