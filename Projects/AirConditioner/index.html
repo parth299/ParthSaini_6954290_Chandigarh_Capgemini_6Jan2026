@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Air Conditioner</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#dbeafe,black);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.ac{
+    width:420px;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    text-align:center;
+    padding:20px;
+    position:relative;
+}
+
+.brand{
+    font-size:22px;
+    font-weight:bold;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.display{
+    background:#111827;
+    color:#00ffcc;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.temp{
+    font-size:40px;
+}
+
+.mode{
+    margin-top:5px;
+}
+
+.status{
+    margin-top:5px;
+    font-size:14px;
+}
+
+.flap{
+    width:100%;
+    height:20px;
+    background:#cbd5e1;
+    margin-top:10px;
+    border-radius:0 0 10px 10px;
+    transform-origin:top;
+    transition:0.6s;
+}
+
+.flap.open{
+    transform:rotateX(60deg);
+}
+
+.controls{
+    margin-top:15px;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1e40af;
+}
+
+.power{
+    background:#ef4444;
+}
+
+.power.on{
+    background:#22c55e;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="ac">
+
+    <div class="brand">Bluestars AC</div>
+
+    <div class="display">
+        <div class="temp" id="temp">24°C</div>
+        <div class="mode" id="mode">Mode: Cool</div>
+        <div class="status" id="status">Status: OFF</div>
+    </div>
+
+    <div class="flap" id="flap"></div>
+
+    <div class="controls">
+        <button onclick="decreaseTemp()">- Temp</button>
+        <button onclick="increaseTemp()">+ Temp</button>
+        <br>
+        <button onclick="changeMode()">Change Mode</button>
+        <button class="power" id="powerBtn" onclick="togglePower()">Power</button>
+    </div>
+
+</div>
+
+<script>
+
+let temperature = 24;
+let power = false;
+let modes = ["Cool","Fan","Dry"];
+let modeIndex = 0;
+
+function updateDisplay(){
+    document.getElementById("temp").innerText = temperature+"°C";
+    document.getElementById("mode").innerText =
+        "Mode: "+modes[modeIndex];
+}
+
+function togglePower(){
+    power = !power;
+
+    const status = document.getElementById("status");
+    const flap = document.getElementById("flap");
+    const btn = document.getElementById("powerBtn");
+
+    if(power){
+        status.innerText="Status: ON";
+        flap.classList.add("open");
+        btn.classList.add("on");
+    }else{
+        status.innerText="Status: OFF";
+        flap.classList.remove("open");
+        btn.classList.remove("on");
+    }
+}
+
+function increaseTemp(){
+    if(!power) return;
+    if(temperature < 30){
+        temperature++;
+        updateDisplay();
+    }
+}
+
+function decreaseTemp(){
+    if(!power) return;
+    if(temperature > 16){
+        temperature--;
+        updateDisplay();
+    }
+}
+
+function changeMode(){
+    if(!power) return;
+    modeIndex = (modeIndex+1)%modes.length;
+    updateDisplay();
+}
+
+</script>
+
+</body>
+</html>
