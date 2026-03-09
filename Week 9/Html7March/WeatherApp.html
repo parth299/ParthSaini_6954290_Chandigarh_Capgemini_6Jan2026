@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather App</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    width:300px;
+}
+
+input{
+    width:70%;
+    padding:8px;
+}
+
+button{
+    padding:8px 10px;
+    cursor:pointer;
+}
+
+.weather{
+    margin-top:20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Weather App</h2>
+
+<input type="text" id="city" placeholder="Enter city name">
+<button onclick="getWeather()">Search</button>
+
+<div class="weather">
+    <h3 id="cityName"></h3>
+    <p id="temp"></p>
+    <p id="condition"></p>
+    <p id="humidity"></p>
+</div>
+
+</div>
+
+<script>
+
+async function getWeather(){
+
+let city = document.getElementById("city").value;
+
+let apiKey = "YOUR_API_KEY";
+
+let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+let response = await fetch(url);
+let data = await response.json();
+
+document.getElementById("cityName").innerText = data.name;
+document.getElementById("temp").innerText = "Temperature: " + data.main.temp + "°C";
+document.getElementById("condition").innerText = "Weather: " + data.weather[0].main;
+document.getElementById("humidity").innerText = "Humidity: " + data.main.humidity + "%";
+
+}
+
+</script>
+
+</body>
+</html>
