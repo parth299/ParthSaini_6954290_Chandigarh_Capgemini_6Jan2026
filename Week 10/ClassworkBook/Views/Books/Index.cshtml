@@ -1,0 +1,43 @@
+@model List<BookModel>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">📚 Books List</h3>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr onclick="location.href='@Url.Action("EditBook","Books", new { id = book.BookId })'" style="cursor:pointer;">
+                            <td>@book.BookId</td>
+                            <td>@book.BookName</td>
+                            <td>@book.AuthorName</td>
+                            <td>₹@book.BookPrice</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+            <a href="@Url.Action("AddBook", "Books")" class="btn btn-primary mb-3">
+                ➕ Add New Book
+            </a>
+
+        </div>
+    </div>
+</div>
