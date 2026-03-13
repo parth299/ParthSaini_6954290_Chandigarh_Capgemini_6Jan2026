@@ -1,0 +1,20 @@
+@model HRMSystem.Models.Company
+
+<h2>Create Company</h2>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address" />
+    </div>
+
+    <button type="submit">Save</button>
+
+</form>

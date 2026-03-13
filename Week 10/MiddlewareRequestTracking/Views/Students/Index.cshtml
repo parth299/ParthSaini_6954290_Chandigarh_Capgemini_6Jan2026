@@ -1,0 +1,42 @@
+@model List<StudentPortal.Models.Student>
+@{
+    var logs = ViewBag.RequestLogs as List<StudentPortal.Models.RequestLog>;
+}
+
+<h2>Students List</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course</th>
+    </tr>
+
+@foreach(var student in Model)
+{
+    <tr>
+        <td>@student.Id</td>
+        <td>@student.Name</td>
+        <td>@student.Course</td>
+    </tr>
+}
+</table>
+
+<h2>Request Logs</h2>
+
+<table border="1">
+    <tr>
+        <th>URL</th>
+        <th>Execution Time (ms)</th>
+        <th>Time</th>
+    </tr>
+
+@foreach(var log in logs)
+{
+    <tr>
+        <td>@log.Url</td>
+        <td>@log.ExecutionTimeMs</td>
+        <td>@log.Time</td>
+    </tr>
+}
+</table>

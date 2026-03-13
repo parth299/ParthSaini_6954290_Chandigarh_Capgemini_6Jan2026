@@ -9,4 +9,5 @@ public class BookModel {
     public string BookName{get; set;}
     public string AuthorName{get; set;}
     public int BookPrice{get; set;}
+    public string BookCategory{get; set;}
 }

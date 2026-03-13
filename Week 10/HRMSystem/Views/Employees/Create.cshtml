@@ -1,0 +1,29 @@
+@model HRMSystem.Models.Employee
+
+<h2>Add Employee</h2>
+
+<form asp-action="Create">
+
+    <div>
+        <label>Name</label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label>Position</label>
+        <input asp-for="Position" />
+    </div>
+
+    <div>
+        <label>Salary</label>
+        <input asp-for="Salary" />
+    </div>
+
+    <div>
+        <label>Company</label>
+        <select asp-for="CompanyId" asp-items="ViewBag.CompanyId"></select>
+    </div>
+
+    <button type="submit">Save</button>
+
+</form>

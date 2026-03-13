@@ -32,6 +32,10 @@ namespace ClassworkBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BookCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BookName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
