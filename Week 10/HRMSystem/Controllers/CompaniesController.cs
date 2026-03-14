@@ -23,15 +23,11 @@ namespace HRMSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Company company)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Companies.Add(company);
-                await _context.SaveChangesAsync();
+            Console.WriteLine("Reaching here");
+            _context.Companies.Add(company);
+            await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(company);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Index()

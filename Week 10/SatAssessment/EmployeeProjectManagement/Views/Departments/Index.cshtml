@@ -1,0 +1,22 @@
+@model IEnumerable<EmployeeProjectManagement.Models.Department>
+
+<h2>Departments</h2>
+
+<a href="/Departments/Create">Create Department</a>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+</tr>
+
+@foreach(var d in Model)
+{
+<tr>
+<td>@d.DepartmentId</td>
+<td>@d.Name</td>
+</tr>
+}
+
+</table>

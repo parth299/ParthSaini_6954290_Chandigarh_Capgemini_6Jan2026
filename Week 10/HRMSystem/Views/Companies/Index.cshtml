@@ -1,27 +1,19 @@
-@model IEnumerable<HRMSystem.Models.Company>
-
 <h2>Companies</h2>
 
-<a asp-action="Create">Create Company</a> |
-<a asp-controller="Employees" asp-action="Create">Add Employee</a>
-
-<hr />
-
-@foreach (var company in Model)
-{
-    <h3>@company.Name</h3>
-    <p>@company.Address</p>
-
-    <strong>Employees:</strong>
-
-    <ul>
-        @foreach (var emp in company.Employees)
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in Model)
         {
-            <li>
-                @emp.Name - @emp.Position - $@emp.Salary
-            </li>
+            <tr>
+                <td>@company.Name</td>
+                <td>@company.Address</td>
+            </tr>
         }
-    </ul>
-
-    <hr />
-}
+    </tbody>
+</table>

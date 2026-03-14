@@ -23,14 +23,11 @@ namespace HRMSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Employee employee)
         {
-            if (ModelState.IsValid)
-            {
+
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Companies");
-            }
 
-            return View(employee);
         }
     }
 }
