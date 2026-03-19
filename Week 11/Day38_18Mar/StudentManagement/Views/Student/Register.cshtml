@@ -1,0 +1,30 @@
+﻿@model Student
+
+<h2 class="text-center">Student Registration</h2>
+
+<div class="container d-flex justify-content-center align-content-center ">
+	<div class="w-50 card border-0 shadow p-4 mt-4">
+		<form class="form" asp-controller="Student" method="post">
+			<div class="mb-3">
+				<label asp-for="Name" class="form-label" >Name</label>
+				<input  asp-for="Name" class="form-control" placeholder="Enter Student Name Please"/>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Email" class="form-label">Email</label>
+				<input asp-for="Email" class="form-control" placeholder="Student Email id" />
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course" class="form-label">Course</label>
+				<input asp-for="Course" class="form-control" placeholder="Course Assigned to student" />
+			</div>
+			<div class="mb-3">
+				<label asp-for="JoiningDate" class="form-label">JoiningDate</label>
+				<input asp-for="JoiningDate"  type="date" class="form-control" />
+			</div>
+			<div class="mb-3 text-center">
+				<button class="btn btn-dark">Register Student</button>
+			</div>
+
+		</form>
+	</div>
+</div>

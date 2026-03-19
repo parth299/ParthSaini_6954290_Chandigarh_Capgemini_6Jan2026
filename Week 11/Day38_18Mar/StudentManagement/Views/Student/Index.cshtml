@@ -1,0 +1,30 @@
+﻿@model List<Student>
+
+<div class="container">
+	<table class="table">
+		<thead>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Course</th>
+			<th>Joining Date</th>
+		</thead>
+		<tbody>
+			@foreach(var entry in Model)
+			{
+				<tr>
+					<td>@entry.Name</td>
+					<td>@entry.Email</td>
+					<td>@entry.Course</td>
+					<td>@entry.JoiningDate</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-success"><a asp-action="Edit" class="text-decoration-none text-white" asp-route-id="@entry.Id">Edit</a></button>
+							<button class="btn btn-danger"><a asp-action="Delete" class="text-decoration-none text-white" asp-route-id="@entry.Id">Delete</a></button>
+						</div>
+						
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

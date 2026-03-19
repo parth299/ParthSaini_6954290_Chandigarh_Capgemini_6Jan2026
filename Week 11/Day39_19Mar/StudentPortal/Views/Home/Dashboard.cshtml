@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <h2>Dashboard</h2>
+
+        <p>Welcome! You are logged in 🎉</p>
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <p><strong>User:</strong> @User.Identity.Name</p>
+        }
+    </div>
+</div>

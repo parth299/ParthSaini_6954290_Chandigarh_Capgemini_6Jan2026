@@ -1,0 +1,36 @@
+﻿@model List<BookViewModel>
+
+<h2>@ViewBag.Message</h2>
+<p>Total Books: @ViewData["TotalBooks"]</p>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Book</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Genre</th>
+            <th>Available</th>
+            <th>Borrower</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Book.Title</td>
+                <td>@item.Book.Author</td>
+                <td>@item.Book.PublishedYear</td>
+                <td>@item.Book.Genre</td>
+                <td>
+                    @(item.IsAvailable ? "Yes" : "No")
+                </td>
+                <td>
+                    @(item.BorrowerName ?? "N/A")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
