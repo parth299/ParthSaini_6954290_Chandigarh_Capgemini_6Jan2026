@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Role Test";
+}
+
+<h2>Role-based API Access Test</h2>
+
+<p>Use this page to validate that your current JWT token is recognized by student/instructor endpoints.</p>
+
+<div class="mb-3">
+    <a asp-action="Student" class="btn btn-primary me-2">Call /api/Test/student</a>
+    <a asp-action="Instructor" class="btn btn-warning">Call /api/Test/instructor</a>
+</div>
+
+@if (ViewBag.StudentResponse != null)
+{
+    <div class="alert alert-success">
+        <strong>Student response:</strong> @ViewBag.StudentResponse
+    </div>
+}
+
+@if (ViewBag.InstructorResponse != null)
+{
+    <div class="alert alert-success">
+        <strong>Instructor response:</strong> @ViewBag.InstructorResponse
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}

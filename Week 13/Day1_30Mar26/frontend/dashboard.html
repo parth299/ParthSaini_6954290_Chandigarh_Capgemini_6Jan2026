@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+      href="css/styles.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Transaction Dashboard</h2>
+
+<button onclick="logout()">
+Logout
+</button>
+
+<hr>
+
+<h3>Add Transaction</h3>
+
+<form id="transactionForm">
+
+<input type="number"
+       id="amount"
+       placeholder="Amount"
+       required>
+
+<select id="type">
+
+<option value="Credit">
+Credit
+</option>
+
+<option value="Debit">
+Debit
+</option>
+
+</select>
+
+<button type="submit">
+Add Transaction
+</button>
+
+</form>
+
+<hr>
+
+<h3>Filters</h3>
+
+<select id="filterType">
+
+<option value="">
+All Types
+</option>
+
+<option value="Credit">
+Credit
+</option>
+
+<option value="Debit">
+Debit
+</option>
+
+</select>
+
+<select id="sortBy">
+
+<option value="date">
+Sort by Date
+</option>
+
+<option value="amount">
+Sort by Amount
+</option>
+
+</select>
+
+<button onclick="applyFilters()">
+Apply
+</button>
+
+<hr>
+
+<h3>Your Transactions</h3>
+
+<table border="1" width="100%">
+
+<thead>
+
+<tr>
+
+<th>Amount</th>
+
+<th>Date</th>
+
+<th>Type</th>
+
+</tr>
+
+</thead>
+
+<tbody id="transactionTable">
+
+</tbody>
+
+</table>
+
+<hr>
+
+<div>
+
+<button onclick="prevPage()">
+Previous
+</button>
+
+<span id="pageNumber">
+1
+</span>
+
+<button onclick="nextPage()">
+Next
+</button>
+
+</div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

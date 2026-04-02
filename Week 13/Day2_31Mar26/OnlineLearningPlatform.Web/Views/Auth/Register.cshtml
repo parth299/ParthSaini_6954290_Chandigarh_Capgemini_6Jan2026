@@ -1,0 +1,135 @@
+@model OnlineLearningPlatform.Web.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+
+<div class="row justify-content-center mt-5">
+
+<div class="col-md-6">
+
+<div class="card shadow-lg p-4 rounded">
+
+<h3 class="text-center mb-4">
+Create Account
+</h3>
+
+<form asp-action="Register"
+      method="post">
+
+<div class="mb-3">
+
+<label class="form-label">
+Username
+</label>
+
+<input asp-for="Username"
+       class="form-control"
+       placeholder="Enter username" />
+
+<span asp-validation-for="Username"
+      class="text-danger"></span>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Email
+</label>
+
+<input asp-for="Email"
+       class="form-control"
+       placeholder="Enter email" />
+
+<span asp-validation-for="Email"
+      class="text-danger"></span>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Password
+</label>
+
+<input asp-for="Password"
+       type="password"
+       class="form-control"
+       placeholder="Enter password" />
+
+<span asp-validation-for="Password"
+      class="text-danger"></span>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Role
+</label>
+
+<select asp-for="Role"
+        class="form-select">
+
+<option value="">
+Select Role
+</option>
+
+<option value="Student">
+Student
+</option>
+
+<option value="Instructor">
+Instructor
+</option>
+
+<option value="Admin">
+Admin
+</option>
+
+</select>
+
+<span asp-validation-for="Role"
+      class="text-danger"></span>
+
+</div>
+
+<div class="d-grid">
+
+<button type="submit"
+        class="btn btn-primary btn-lg">
+
+Register
+
+</button>
+
+</div>
+
+<div class="text-center mt-3">
+
+<a asp-action="Login">
+
+Already have account? Login
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+@section Scripts {
+
+<partial name="_ValidationScriptsPartial" />
+
+}

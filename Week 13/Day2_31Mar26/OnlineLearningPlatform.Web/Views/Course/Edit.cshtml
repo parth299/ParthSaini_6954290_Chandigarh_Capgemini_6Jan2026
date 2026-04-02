@@ -1,0 +1,30 @@
+@model OnlineLearningPlatform.Web.ViewModels.CourseViewModel
+
+<h2>Edit Course</h2>
+
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <label>Title</label>
+    <input
+        name="Title"
+        class="form-control"
+        value="@Model.Title"
+        required />
+
+    <label>Description</label>
+    <textarea
+        name="Description"
+        class="form-control"
+        required>@Model.Description</textarea>
+
+    <br />
+
+    <button class="btn btn-primary" type="submit">
+        Save Changes
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary ms-2">
+        Cancel
+    </a>
+</form>

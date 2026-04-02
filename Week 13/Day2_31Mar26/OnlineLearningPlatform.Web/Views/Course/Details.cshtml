@@ -1,0 +1,45 @@
+@model OnlineLearningPlatform.Web.ViewModels.CourseViewModel
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>@Model.Title</h2>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Back to Courses</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit Course</a>
+    </div>
+</div>
+
+<p>@Model.Description</p>
+
+<hr />
+
+<h4>Lessons</h4>
+
+<ul>
+@foreach (var lesson in (List<OnlineLearningPlatform.Web.ViewModels.LessonViewModel>)ViewBag.Lessons)
+{
+    <li>
+        <strong>@lesson.Title</strong><br />
+        @lesson.Content
+    </li>
+}
+</ul>
+
+<hr />
+
+<h4>Add Lesson</h4>
+
+<form method="post" asp-action="AddLesson">
+    <input type="hidden" name="courseId" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Lesson Title</label>
+        <input name="title" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Lesson Content</label>
+        <textarea name="content" class="form-control" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Lesson</button>
+</form>
