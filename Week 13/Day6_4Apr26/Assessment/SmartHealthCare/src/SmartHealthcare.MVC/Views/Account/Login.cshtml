@@ -1,0 +1,370 @@
+@model SmartHealthcare.Models.DTOs.LoginDTO
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-wrapper">
+
+    <div class="login-container">
+
+        <!-- LEFT PANEL -->
+        <div class="login-left">
+
+            <div class="brand-box">
+
+                <i class="bi bi-heart-pulse-fill brand-icon"></i>
+
+                <h2>Smart Healthcare</h2>
+
+                <p>
+                    Your digital healthcare companion.
+                    Secure. Fast. Reliable.
+                </p>
+
+                <div class="feature-mini">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Secure Login
+                </div>
+
+                <div class="feature-mini">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Easy Appointments
+                </div>
+
+                <div class="feature-mini">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Trusted Doctors
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT PANEL -->
+        <div class="login-right">
+
+            <div class="login-card">
+
+                <h3 class="mb-4 text-center">
+                    Welcome Back 👋
+                </h3>
+
+                <form asp-action="Login" method="post" novalidate>
+
+                    <div asp-validation-summary="All"
+                         class="alert alert-danger small">
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="form-floating mb-4">
+
+                        <input asp-for="Email"
+                               class="form-control"
+                               placeholder="Email">
+
+                        <label asp-for="Email">
+                            Email Address
+                        </label>
+
+                        <span asp-validation-for="Email"
+                              class="text-danger small">
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+                    <div class="form-floating mb-4">
+
+                        <input asp-for="Password"
+                               type="password"
+                               class="form-control"
+                               placeholder="Password">
+
+                        <label asp-for="Password">
+                            Password
+                        </label>
+
+                        <span asp-validation-for="Password"
+                              class="text-danger small">
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- REMEMBER -->
+                    <div class="form-check mb-4">
+
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="rememberMe">
+
+                        <label class="form-check-label"
+                               for="rememberMe">
+
+                            Remember me
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- LOGIN BUTTON -->
+                    <button type="submit"
+                            class="btn login-btn w-100">
+
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Login
+
+                    </button>
+
+
+
+                    <!-- DEMO INFO -->
+                    <div class="demo-box mt-4">
+
+                        <strong>Demo Credentials</strong><br>
+
+                        Email:
+                        admin@healthcare.com<br>
+
+                        Password:
+                        Admin@123
+
+                    </div>
+
+                </form>
+
+
+
+                <!-- FOOTER -->
+                <div class="login-footer">
+
+                    Don't have an account?
+
+                    <a asp-action="Register">
+
+                        Register here
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+<style>
+
+/* BACKGROUND */
+
+.login-wrapper {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #9333ea
+        );
+
+}
+
+
+
+/* MAIN CONTAINER */
+
+.login-container {
+
+    width: 900px;
+
+    max-width: 95%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.2);
+
+}
+
+
+
+/* LEFT SIDE */
+
+.login-left {
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #8b5cf6
+        );
+
+    color: white;
+
+    padding: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+
+.brand-icon {
+
+    font-size: 3rem;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.feature-mini {
+
+    margin-top: 10px;
+
+    opacity: 0.9;
+
+}
+
+
+
+/* RIGHT SIDE */
+
+.login-right {
+
+    padding: 40px;
+
+}
+
+
+
+.login-card {
+
+    width: 100%;
+
+}
+
+
+
+/* BUTTON */
+
+.login-btn {
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #9333ea
+        );
+
+    color: white;
+
+    font-weight: 600;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+
+}
+
+
+
+.login-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.2);
+
+}
+
+
+
+/* DEMO BOX */
+
+.demo-box {
+
+    background: #f8fafc;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-size: 0.85rem;
+
+}
+
+
+
+/* FOOTER */
+
+.login-footer {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    font-size: 0.9rem;
+
+}
+
+
+
+/* RESPONSIVE */
+
+@@media (max-width: 768px) {
+
+.login-container {
+
+    grid-template-columns: 1fr;
+
+}
+
+.login-left {
+
+    display: none;
+
+}
+
+}
+
+</style>

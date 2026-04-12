@@ -1,0 +1,16 @@
+@model ECommerce.MVC.Models.Product
+
+<h2>Add Product</h2>
+
+<form asp-action="Create" method="post">
+
+    <label>Name</label>
+    <input asp-for="Name" />
+
+    <br /><br />
+
+    <button type="submit">
+        Save Product
+    </button>
+
+</form>

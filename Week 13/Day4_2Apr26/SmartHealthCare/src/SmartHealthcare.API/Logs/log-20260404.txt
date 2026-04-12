@@ -1,0 +1,47 @@
+2026-04-04 09:43:08.160 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-04 09:43:08.222 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-04 09:43:08.224 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-04 09:43:08.225 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-04 09:43:08.273 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-04 09:43:08.279 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-04-04 09:43:08.386 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Doctors] AS [d]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-04 09:43:08.397 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Patients] AS [p]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-04 09:43:08.403 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Appointments] AS [a]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-04 09:43:08.408 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Prescriptions] AS [p]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-04 09:43:08.414 +05:30 [INF] User profile is available. Using '/Users/parthsaini/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-04-04 09:43:08.442 +05:30 [INF] Now listening on: http://localhost:5293
+2026-04-04 09:43:08.443 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-04 09:43:08.443 +05:30 [INF] Hosting environment: Development
+2026-04-04 09:43:08.443 +05:30 [INF] Content root path: /Users/parthsaini/Desktop/capegemini/Capegemini_Sec3_CU_Parthsaini/Week 13/Day4_2Apr26/SmartHealthCare/src/SmartHealthcare.API
+2026-04-04 09:54:48.501 +05:30 [INF] Application is shutting down...

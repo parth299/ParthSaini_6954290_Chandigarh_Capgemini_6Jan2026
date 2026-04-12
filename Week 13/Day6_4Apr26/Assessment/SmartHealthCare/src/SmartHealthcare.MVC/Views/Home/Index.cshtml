@@ -1,0 +1,529 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    var token = Context.Session.GetString("Token");
+}
+
+<!-- HERO SECTION -->
+<section class="hero-modern">
+
+    <div class="hero-left">
+        <span class="badge-modern">
+            <i class="bi bi-shield-check"></i>
+            Connected Healthcare Platform
+        </span>
+
+        <h1 class="hero-title">
+            Smart Healthcare
+            <span>Management System</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Manage patients, doctors, appointments, and prescriptions
+            from one beautiful and intelligent dashboard.
+        </p>
+
+        <div class="hero-buttons">
+
+            @if (token == null)
+            {
+                <a asp-controller="Account"
+                   asp-action="Register"
+                   class="btn-modern primary">
+
+                    <i class="bi bi-person-plus"></i>
+                    Get Started
+                </a>
+
+                <a asp-controller="Doctor"
+                   asp-action="Index"
+                   class="btn-modern outline">
+
+                    <i class="bi bi-search"></i>
+                    Browse Doctors
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="btn-modern primary">
+
+                    <i class="bi bi-speedometer2"></i>
+                    Dashboard
+                </a>
+
+                <a asp-controller="Appointment"
+                   asp-action="Create"
+                   class="btn-modern outline">
+
+                    <i class="bi bi-calendar-check"></i>
+                    Book Appointment
+                </a>
+            }
+
+        </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="hero-right">
+
+        <div class="glass-stat">
+            <i class="bi bi-clock-fill"></i>
+            <div>
+                <h4>24/7</h4>
+                <span>Service Access</span>
+            </div>
+        </div>
+
+        <div class="glass-stat">
+            <i class="bi bi-lightning-fill"></i>
+            <div>
+                <h4>Fast</h4>
+                <span>Booking</span>
+            </div>
+        </div>
+
+        <div class="glass-stat">
+            <i class="bi bi-shield-lock-fill"></i>
+            <div>
+                <h4>Secure</h4>
+                <span>Data Safety</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- FEATURES -->
+<section class="features-modern">
+
+    <div class="feature-box blue">
+
+        <i class="bi bi-person-lines-fill"></i>
+
+        <h3>For Patients</h3>
+
+        <p>
+            Book appointments, view history,
+            manage profiles, and receive prescriptions digitally.
+        </p>
+
+        <a href="@Url.Action("Index","Doctor")"
+           class="feature-link">
+
+            Learn More →
+        </a>
+
+    </div>
+
+
+
+    <div class="feature-box green">
+
+        <i class="bi bi-stethoscope"></i>
+
+        <h3>For Doctors</h3>
+
+        <p>
+            Manage schedules, track patients,
+            and provide prescriptions efficiently.
+        </p>
+
+        <a href="@Url.Action("Register","Account")"
+           class="feature-link">
+
+            Register Now →
+        </a>
+
+    </div>
+
+
+
+    <div class="feature-box purple">
+
+        <i class="bi bi-speedometer2"></i>
+
+        <h3>For Administrators</h3>
+
+        <p>
+            Monitor performance,
+            manage users,
+            and control healthcare operations.
+        </p>
+
+        <a href="@Url.Action("Login","Account")"
+           class="feature-link">
+
+            Admin Login →
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- WHY CHOOSE US -->
+<section class="why-modern">
+
+    <div class="why-left">
+
+        <h2>
+            Why Choose Smart Healthcare?
+        </h2>
+
+        <ul>
+
+            <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Easy Appointment Booking
+            </li>
+
+            <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Verified Doctors
+            </li>
+
+            <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Digital Prescriptions
+            </li>
+
+            <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Secure Data
+            </li>
+
+            <li>
+                <i class="bi bi-check-circle-fill"></i>
+                Available 24/7
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+    <div class="why-card">
+
+        <i class="bi bi-heart-pulse-fill"></i>
+
+        <h3>Your Health,
+            Our Priority</h3>
+
+        <p>
+            Accessible, affordable,
+            and modern healthcare services
+            built for everyone.
+        </p>
+
+        @if (token == null)
+        {
+            <a href="@Url.Action("Register","Account")"
+               class="btn-modern primary">
+
+                Start Your Journey
+            </a>
+        }
+
+    </div>
+
+</section>
+
+
+
+<style>
+
+/* GLOBAL */
+
+body {
+    background: #f4f7fb;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+/* HERO */
+
+.hero-modern {
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    gap: 40px;
+
+    padding: 60px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #9333ea
+        );
+
+    color: white;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.2);
+
+}
+
+
+
+/* LEFT */
+
+.hero-title {
+
+    font-size: 3rem;
+
+    font-weight: 700;
+
+    margin-top: 20px;
+
+}
+
+.hero-title span {
+
+    display: block;
+
+    color: #fde047;
+
+}
+
+
+
+.hero-subtitle {
+
+    opacity: 0.9;
+
+    font-size: 1.1rem;
+
+    margin-top: 15px;
+
+}
+
+
+
+/* BUTTONS */
+
+.btn-modern {
+
+    padding: 12px 26px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    margin-right: 10px;
+
+    transition: 0.3s;
+
+}
+
+
+
+.btn-modern.primary {
+
+    background: white;
+
+    color: #4f46e5;
+
+}
+
+
+
+.btn-modern.primary:hover {
+
+    transform: translateY(-3px);
+
+}
+
+
+
+.btn-modern.outline {
+
+    border: 2px solid white;
+
+    color: white;
+
+}
+
+
+
+/* GLASS STATS */
+
+.glass-stat {
+
+    display: flex;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    margin-bottom: 15px;
+
+    background:
+        rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s;
+
+}
+
+
+
+.glass-stat:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+
+/* FEATURES */
+
+.features-modern {
+
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(260px,1fr));
+
+    gap: 30px;
+
+}
+
+
+
+.feature-box {
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+
+}
+
+
+
+.feature-box:hover {
+
+    transform: translateY(-8px);
+
+}
+
+
+
+.feature-box i {
+
+    font-size: 2rem;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+/* COLORS */
+
+.blue {
+
+    border-top: 5px solid #3b82f6;
+
+}
+
+.green {
+
+    border-top: 5px solid #10b981;
+
+}
+
+.purple {
+
+    border-top: 5px solid #8b5cf6;
+
+}
+
+
+
+/* WHY */
+
+.why-modern {
+
+    margin-top: 80px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+
+}
+
+
+
+.why-card {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.1);
+
+}
+
+
+
+.why-card i {
+
+    font-size: 3rem;
+
+    color: #ef4444;
+
+}
+
+
+
+/* RESPONSIVE */
+
+@@media(max-width:768px) {
+
+.hero-modern {
+
+    grid-template-columns: 1fr;
+
+}
+
+.why-modern {
+
+    grid-template-columns: 1fr;
+
+}
+
+}
+
+</style>

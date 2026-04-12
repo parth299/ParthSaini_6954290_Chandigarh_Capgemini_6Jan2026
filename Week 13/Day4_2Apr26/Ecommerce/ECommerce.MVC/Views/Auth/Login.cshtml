@@ -1,0 +1,153 @@
+@model LoginViewModel
+
+@{
+ViewData["Title"] = "Login";
+}
+
+<style>
+    /* Login Page Background */
+    body {
+        background: linear-gradient(135deg, #5473fa, #0d6eff);
+    }
+
+    /* Center Container */
+    .login-wrapper {
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Glass Card */
+    .login-card {
+        width: 370px;
+        padding: 40px;
+
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+
+        border-radius: 16px;
+
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+
+        text-align: center;
+
+        border: 1px solid rgba(255,255,255,0.2);
+
+        animation: fadeIn 0.6s ease;
+    }
+
+    h2 {
+        color: white;
+        margin-bottom: 25px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 14px;
+        margin: 10px 0;
+
+        border-radius: 8px;
+        border: none;
+
+        outline: none;
+
+        font-size: 15px;
+
+        transition: 0.3s ease;
+
+        background: rgba(255,255,255,0.9);
+    }
+
+    input:focus {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 2px #667eea;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+
+        margin-top: 10px;
+
+        background: linear-gradient(135deg, #ff7a18, #ffb347);
+
+        color: white;
+
+        border: none;
+
+        border-radius: 8px;
+
+        font-size: 16px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .error {
+        color: #ff4d4d;
+        margin-top: 12px;
+        font-weight: 500;
+    }
+
+    .hint {
+        color: rgba(255,255,255,0.8);
+        font-size: 13px;
+        margin-top: 18px;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="login-wrapper">
+
+<div class="login-card">
+
+    <h2>🛒 ECommerce Login</h2>
+
+    <form method="post">
+
+        <input asp-for="Username"
+               placeholder="Username" />
+
+        <input asp-for="Password"
+               type="password"
+               placeholder="Password" />
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <p class="error">
+            @ViewBag.Error
+        </p>
+    }
+
+    <!-- Admin: admin/123 | User: user/123 -->
+
+</div>
+
+</div>

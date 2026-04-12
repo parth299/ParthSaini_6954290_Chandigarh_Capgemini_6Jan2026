@@ -1,0 +1,72 @@
+@model SmartHealthcare.MVC.Models.ViewModels.BillingViewModel
+
+@{
+    ViewData["Title"] = "Billing";
+}
+
+<div class="container mt-4">
+
+<div class="card shadow-lg">
+
+<div class="card-header bg-primary text-white">
+
+<h3>
+<i class="bi bi-receipt"></i>
+Billing Details
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<h5 class="mb-3">
+
+Appointment #@Model.Appointment.Id
+
+</h5>
+
+<hr />
+
+<h5>Consultation Fee</h5>
+
+<p class="fs-5">
+₹ @Model.ConsultationFee
+</p>
+
+<hr />
+
+<h5>Medicines</h5>
+
+@if (Model.Prescription.Medicines?.Count > 0)
+{
+    <ul>
+
+    @foreach (var med in Model.Prescription.Medicines)
+    {
+        <li>
+            @med.Name — ₹100
+        </li>
+    }
+
+    </ul>
+}
+
+<p class="fw-bold">
+Medicine Total:
+₹ @Model.MedicineTotal
+</p>
+
+<hr />
+
+<h4 class="text-success">
+
+Total Bill:
+₹ @Model.Total
+
+</h4>
+
+</div>
+
+</div>
+
+</div>

@@ -1,0 +1,405 @@
+@model IEnumerable<SmartHealthcare.Models.DTOs.AppointmentDTO>
+
+@{
+    ViewData["Title"] = "My Appointments";
+    var role = ViewBag.Role as string;
+}
+
+<div class="appointment-shell">
+
+<!-- HEADER -->
+
+<div class="appointment-header">
+
+<div>
+
+<h2>
+
+<i class="bi bi-calendar-check"></i>
+
+Appointments
+
+</h2>
+
+<p>
+
+Manage your upcoming visits
+and medical schedules.
+
+</p>
+
+</div>
+
+
+
+@if (role == "Patient")
+{
+<a asp-action="Create"
+   class="btn theme-btn">
+
+<i class="bi bi-plus-circle"></i>
+
+Book Appointment
+
+</a>
+}
+
+</div>
+
+
+
+@if (Model.Any())
+{
+
+<div class="row g-4 mt-3">
+
+@foreach (var item in Model)
+{
+
+<div class="col-md-6 col-lg-4">
+
+<div class="appointment-card-modern">
+
+<div class="status-bar
+@GetStatusColor(item.Status)">
+
+<span>
+
+@item.Status
+
+</span>
+
+</div>
+
+
+
+<div class="appointment-body">
+
+<h6>
+
+Appointment #@item.Id
+
+</h6>
+
+
+
+<div class="appointment-details">
+
+<p>
+
+<i class="bi bi-person"></i>
+
+<strong>Patient:</strong>
+
+@item.PatientName
+
+</p>
+
+
+
+<p>
+
+<i class="bi bi-hospital"></i>
+
+<strong>Doctor:</strong>
+
+Dr. @item.DoctorName
+
+</p>
+
+
+
+<p>
+
+<i class="bi bi-clock"></i>
+
+<strong>Date:</strong>
+
+@item.AppointmentDate
+.ToString("dd MMM yyyy HH:mm")
+
+</p>
+
+
+
+@if (!string.IsNullOrEmpty(item.Notes))
+{
+
+<p class="text-muted">
+
+<i class="bi bi-sticky"></i>
+
+@item.Notes
+
+</p>
+
+}
+
+</div>
+
+
+
+<a asp-action="Details"
+   asp-route-id="@item.Id"
+   class="btn btn-outline-primary btn-sm w-100 mt-2">
+
+View Details
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+}
+
+</div>
+
+}
+
+else
+{
+
+<div class="empty-state">
+
+<i class="bi bi-calendar-x"></i>
+
+<h4>
+
+No Appointments Yet
+
+</h4>
+
+<p>
+
+Start by booking your first appointment.
+
+</p>
+
+@if (role == "Patient")
+{
+
+<a asp-action="Create"
+   class="btn theme-btn">
+
+Book Appointment
+
+</a>
+
+}
+
+</div>
+
+}
+
+</div>
+
+
+
+@functions {
+
+private string GetStatusColor(string status)
+{
+return status?.ToLower() switch
+{
+"pending" => "status-warning",
+"completed" => "status-success",
+"cancelled" => "status-danger",
+_ => "status-secondary"
+};
+}
+
+}
+
+
+
+<style>
+
+/* SHELL */
+
+.appointment-shell {
+
+max-width: 1200px;
+
+margin: auto;
+
+}
+
+
+
+/* HEADER */
+
+.appointment-header {
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#9333ea
+);
+
+color: white;
+
+padding: 25px;
+
+border-radius: 16px;
+
+margin-bottom: 20px;
+
+}
+
+
+
+/* CARD */
+
+.appointment-card-modern {
+
+background: white;
+
+border-radius: 16px;
+
+overflow: hidden;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+transition: 0.3s;
+
+}
+
+
+
+.appointment-card-modern:hover {
+
+transform: translateY(-6px);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.15);
+
+}
+
+
+
+/* STATUS BAR */
+
+.status-bar {
+
+padding: 8px 15px;
+
+color: white;
+
+font-weight: 600;
+
+font-size: 0.85rem;
+
+}
+
+
+
+/* STATUS COLORS */
+
+.status-warning {
+
+background: #f59e0b;
+
+}
+
+.status-success {
+
+background: #22c55e;
+
+}
+
+.status-danger {
+
+background: #ef4444;
+
+}
+
+.status-secondary {
+
+background: #6b7280;
+
+}
+
+
+
+/* BODY */
+
+.appointment-body {
+
+padding: 18px;
+
+}
+
+
+
+.appointment-details p {
+
+margin-bottom: 6px;
+
+font-size: 0.9rem;
+
+}
+
+
+
+/* BUTTON */
+
+.theme-btn {
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#9333ea
+);
+
+color: white;
+
+border-radius: 10px;
+
+padding: 10px 18px;
+
+}
+
+
+
+/* EMPTY STATE */
+
+.empty-state {
+
+text-align: center;
+
+padding: 60px 20px;
+
+background: white;
+
+border-radius: 16px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+.empty-state i {
+
+font-size: 3rem;
+
+color: #9333ea;
+
+margin-bottom: 15px;
+
+}
+
+</style>

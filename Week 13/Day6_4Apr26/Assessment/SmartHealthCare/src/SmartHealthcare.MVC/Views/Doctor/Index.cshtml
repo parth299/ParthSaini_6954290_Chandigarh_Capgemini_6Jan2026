@@ -1,0 +1,521 @@
+@model SmartHealthcare.Models.DTOs.PagedResult<SmartHealthcare.Models.DTOs.DoctorDTO>
+
+@{
+    ViewData["Title"] = "Find a Doctor";
+}
+
+<div class="doctor-shell">
+
+<!-- HEADER -->
+
+<div class="doctor-header">
+
+<h2>
+
+<i class="bi bi-stethoscope"></i>
+
+Find Your Doctor
+
+</h2>
+
+<p>
+
+Browse verified healthcare professionals
+and book appointments easily.
+
+</p>
+
+</div>
+
+
+
+<!-- SEARCH PANEL -->
+
+<div class="search-panel">
+
+<form method="get"
+      class="row g-3">
+
+<div class="col-md-4">
+
+<label class="form-label">
+
+Specialization
+
+</label>
+
+<input type="text"
+       name="specialization"
+       value="@ViewBag.Specialization"
+       class="form-control modern-input"
+       placeholder="Cardiology, Dermatology" />
+
+</div>
+
+
+
+<div class="col-md-4">
+
+<label class="form-label">
+
+Doctor Name
+
+</label>
+
+<input type="text"
+       name="name"
+       value="@ViewBag.Name"
+       class="form-control modern-input"
+       placeholder="Doctor name" />
+
+</div>
+
+
+
+<div class="col-md-4 d-flex align-items-end">
+
+<button type="submit"
+        class="btn theme-btn w-100">
+
+<i class="bi bi-search"></i>
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+@if (Model?.Items != null && Model.Items.Any())
+{
+
+<div class="row g-4 mt-3">
+
+@foreach (var doctor in Model.Items)
+{
+
+<div class="col-md-6 col-lg-4">
+
+<div class="doctor-card">
+
+<div class="doctor-top">
+
+<div>
+
+<h5>
+
+<i class="bi bi-person-circle"></i>
+
+Dr. @doctor.FullName
+
+</h5>
+
+<small class="text-muted">
+
+@string.Join(", ", doctor.Specializations ?? new List<string>())
+
+</small>
+
+</div>
+
+
+
+<span class="status-badge
+@(doctor.IsAvailable ? "available" : "offline")">
+
+@(doctor.IsAvailable ? "Available" : "Unavailable")
+
+</span>
+
+</div>
+
+
+
+<hr>
+
+
+
+<div class="doctor-details">
+
+<p>
+
+<i class="bi bi-envelope"></i>
+
+@doctor.Email
+
+</p>
+
+<p>
+
+<i class="bi bi-telephone"></i>
+
+@doctor.Phone
+
+</p>
+
+<p>
+
+<i class="bi bi-briefcase"></i>
+
+@doctor.YearsOfExperience years
+
+</p>
+
+<p>
+
+<i class="bi bi-cash-coin"></i>
+
+₹ @doctor.ConsultationFee
+
+</p>
+
+<p>
+
+<i class="bi bi-credit-card"></i>
+
+@doctor.LicenseNumber
+
+</p>
+
+</div>
+
+
+
+<div class="doctor-actions">
+
+<a asp-action="Details"
+   asp-route-id="@doctor.Id"
+   class="btn btn-outline-primary btn-sm">
+
+View Details
+
+</a>
+
+
+
+@if (doctor.IsAvailable)
+{
+
+<a asp-controller="Appointment"
+   asp-action="Create"
+   class="btn btn-success btn-sm">
+
+Book Appointment
+
+</a>
+
+}
+
+</div>
+
+</div>
+
+</div>
+
+}
+
+</div>
+
+
+
+<!-- PAGINATION -->
+
+@if (Model.PageNumber > 1 || Model.Items.Count() == Model.PageSize)
+{
+
+<nav class="mt-5">
+
+<ul class="pagination justify-content-center modern-pagination">
+
+@if (Model.PageNumber > 1)
+{
+
+<li class="page-item">
+
+<a class="page-link"
+   href="?page=1">
+
+First
+
+</a>
+
+</li>
+
+
+
+<li class="page-item">
+
+<a class="page-link"
+   href="?page=@(Model.PageNumber - 1)">
+
+Previous
+
+</a>
+
+</li>
+
+}
+
+<li class="page-item active">
+
+<span class="page-link">
+
+Page @Model.PageNumber
+
+</span>
+
+</li>
+
+@if (Model.PageNumber * 10 < Model.TotalCount)
+{
+
+<li class="page-item">
+
+<a class="page-link"
+   href="?page=@(Model.PageNumber + 1)">
+
+Next
+
+</a>
+
+</li>
+
+}
+
+</ul>
+
+</nav>
+
+}
+
+}
+
+
+
+else
+{
+
+<div class="alert alert-info text-center mt-4">
+
+<h5>
+
+No Doctors Found
+
+</h5>
+
+<p>
+
+Try changing search filters.
+
+</p>
+
+<a href="@Url.Action("Index")"
+   class="btn btn-outline-primary">
+
+Clear Filters
+
+</a>
+
+</div>
+
+}
+
+</div>
+
+
+
+<style>
+
+/* SHELL */
+
+.doctor-shell {
+
+max-width: 1200px;
+
+margin: auto;
+
+}
+
+
+
+/* HEADER */
+
+.doctor-header {
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#9333ea
+);
+
+color: white;
+
+padding: 30px;
+
+border-radius: 16px;
+
+margin-bottom: 20px;
+
+}
+
+
+
+/* SEARCH */
+
+.search-panel {
+
+background: white;
+
+padding: 20px;
+
+border-radius: 16px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+/* CARD */
+
+.doctor-card {
+
+background: white;
+
+padding: 20px;
+
+border-radius: 16px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+transition: 0.3s;
+
+}
+
+
+
+.doctor-card:hover {
+
+transform: translateY(-6px);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.15);
+
+}
+
+
+
+/* TOP */
+
+.doctor-top {
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+}
+
+
+
+/* STATUS */
+
+.status-badge {
+
+padding: 5px 12px;
+
+border-radius: 8px;
+
+font-size: 0.8rem;
+
+font-weight: 600;
+
+}
+
+
+
+.available {
+
+background: #dcfce7;
+
+color: #166534;
+
+}
+
+
+
+.offline {
+
+background: #e5e7eb;
+
+color: #374151;
+
+}
+
+
+
+/* DETAILS */
+
+.doctor-details p {
+
+font-size: 0.9rem;
+
+margin-bottom: 6px;
+
+}
+
+
+
+/* BUTTON */
+
+.theme-btn {
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#9333ea
+);
+
+color: white;
+
+border-radius: 10px;
+
+}
+
+
+
+/* ACTIONS */
+
+.doctor-actions {
+
+display: flex;
+
+gap: 8px;
+
+margin-top: 12px;
+
+}
+
+
+
+/* PAGINATION */
+
+.modern-pagination .page-link {
+
+border-radius: 8px;
+
+margin: 2px;
+
+}
+
+</style>
