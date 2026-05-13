@@ -77,7 +77,7 @@ Your Smart Healthcare Management System has been completely improved and is now 
 - Specialization (Medical specializations)
 - DoctorSpecialization (Doctor specialty mapping)
 - RefreshToken (Token management)
-
+a
 #### Features:
 ✅ Entity Framework Core  
 ✅ SQL Server support  

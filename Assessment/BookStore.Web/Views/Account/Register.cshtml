@@ -1,0 +1,122 @@
+@model BookStore.Web.Models.DTOs.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <h4><i class="fas fa-user-plus"></i> Create Your Account</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Register" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FullName" class="form-label"></label>
+                                <input asp-for="FullName" class="form-control" placeholder="Enter your full name" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" type="email" class="form-control" placeholder="Enter your email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Password" class="form-label"></label>
+                                <input asp-for="Password" type="password" class="form-control" 
+                                       placeholder="Create a password" 
+                                       title="Password must be 8-50 characters with uppercase, lowercase, number, and special character" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                                <div class="form-text">
+                                    <small class="text-muted">Must include uppercase, lowercase, number, and special character</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ConfirmPassword" class="form-label"></label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label"></label>
+                            <input asp-for="Phone" type="tel" class="form-control" placeholder="Enter your phone number" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p class="mb-0">Already have an account? 
+                        <a asp-action="Login" class="text-success">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Password strength indicator
+        $(document).ready(function() {
+            $('#Password').on('input', function() {
+                var password = $(this).val();
+                var strength = 0;
+                
+                if (password.length >= 8) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                var strengthText = '';
+                var strengthClass = '';
+                
+                switch(strength) {
+                    case 0:
+                    case 1:
+                        strengthText = 'Very Weak';
+                        strengthClass = 'text-danger';
+                        break;
+                    case 2:
+                        strengthText = 'Weak';
+                        strengthClass = 'text-warning';
+                        break;
+                    case 3:
+                        strengthText = 'Fair';
+                        strengthClass = 'text-info';
+                        break;
+                    case 4:
+                        strengthText = 'Good';
+                        strengthClass = 'text-primary';
+                        break;
+                    case 5:
+                        strengthText = 'Strong';
+                        strengthClass = 'text-success';
+                        break;
+                }
+                
+                $('#password-strength').remove();
+                if (password.length > 0) {
+                    $(this).after('<div id="password-strength" class="' + strengthClass + ' small mt-1">' + strengthText + '</div>');
+                }
+            });
+            
+            // Clear alerts after 5 seconds
+            $('.alert').delay(5000).fadeOut();
+        });
+    </script>
+}

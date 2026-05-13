@@ -1,0 +1,21 @@
+@model Book
+
+<h2>Add Book</h2>
+
+<form asp-action="Create">
+
+    <label>Title</label>
+    <input asp-for="Title" />
+
+    <br />
+
+    <label>Price</label>
+    <input asp-for="Price" />
+
+    <br /><br />
+
+    <button type="submit">
+        Save
+    </button>
+
+</form>

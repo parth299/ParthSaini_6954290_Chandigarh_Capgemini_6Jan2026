@@ -1,0 +1,218 @@
+@model BookStore.Web.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-credit-card"></i> Checkout
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Checkout Form -->
+        <div class="col-lg-8">
+            <form method="post" asp-action="PlaceOrder">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Shipping Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ShippingAddress" class="form-label">Shipping Address *</label>
+                                <textarea name="ShippingAddress" id="ShippingAddress" 
+                                          class="form-control" rows="3" 
+                                          placeholder="Enter your complete shipping address" required></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="BillingAddress" class="form-label">Billing Address</label>
+                                <textarea name="BillingAddress" id="BillingAddress" 
+                                          class="form-control" rows="3" 
+                                          placeholder="Leave empty if same as shipping address"></textarea>
+                                <div class="form-text">
+                                    <small class="text-muted">Leave empty if same as shipping address</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="Phone" class="form-label">Phone Number *</label>
+                                <input type="tel" name="Phone" id="Phone" class="form-control" 
+                                       placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Email" class="form-label">Email Address *</label>
+                                <input type="email" name="Email" id="Email" class="form-control" 
+                                       placeholder="Enter your email address" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Payment Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> 
+                            This is a demo application. Payment processing is simulated.
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="CardNumber" class="form-label">Card Number *</label>
+                                <input type="text" name="CardNumber" id="CardNumber" class="form-control" 
+                                       placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="ExpiryMonth" class="form-label">Expiry Month *</label>
+                                <select name="ExpiryMonth" id="ExpiryMonth" class="form-select" required>
+                                    <option value="">MM</option>
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                        <option value="@i.ToString("D2")">@i.ToString("D2")</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="ExpiryYear" class="form-label">Expiry Year *</label>
+                                <select name="ExpiryYear" id="ExpiryYear" class="form-select" required>
+                                    <option value="">YYYY</option>
+                                    @for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="CardHolderName" class="form-label">Cardholder Name *</label>
+                                <input type="text" name="CardHolderName" id="CardHolderName" 
+                                       class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="CVV" class="form-label">CVV *</label>
+                                <input type="text" name="CVV" id="CVV" class="form-control" 
+                                       placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-header">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>
+                                <small class="text-muted">@item.Title</small>
+                                <br>
+                                <small class="text-muted">Qty: @item.Quantity</small>
+                            </div>
+                            <small>$@(item.Price * item.Quantity).ToString("F2")</small>
+                        </div>
+                    }
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>$@Model.TotalAmount.ToString("F2")</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping:</span>
+                        <span class="text-success">FREE</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total:</strong>
+                        <strong class="text-primary">$@Model.TotalAmount.ToString("F2")</strong>
+                    </div>
+                    
+                    <!-- Hidden fields for form data -->
+                    <input type="hidden" name="ShippingAddress" id="hiddenShippingAddress" />
+                    <input type="hidden" name="BillingAddress" id="hiddenBillingAddress" />
+                    <input type="hidden" name="Phone" id="hiddenPhone" />
+                    <input type="hidden" name="Email" id="hiddenEmail" />
+                    <input type="hidden" name="CardNumber" id="hiddenCardNumber" />
+                    <input type="hidden" name="ExpiryMonth" id="hiddenExpiryMonth" />
+                    <input type="hidden" name="ExpiryYear" id="hiddenExpiryYear" />
+                    <input type="hidden" name="CardHolderName" id="hiddenCardHolderName" />
+                    <input type="hidden" name="CVV" id="hiddenCVV" />
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg" id="placeOrderBtn" disabled>
+                            <i class="fas fa-check"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Copy shipping to billing if billing is empty
+        document.getElementById('ShippingAddress').addEventListener('input', function() {
+            var billing = document.getElementById('BillingAddress');
+            if (billing.value.trim() === '') {
+                billing.value = this.value;
+            }
+        });
+
+        // Basic form validation
+        function validateForm() {
+            var requiredFields = ['ShippingAddress', 'Phone', 'Email', 'CardNumber', 'ExpiryMonth', 'ExpiryYear', 'CardHolderName', 'CVV'];
+            var isValid = true;
+            
+            requiredFields.forEach(function(fieldId) {
+                var field = document.getElementById(fieldId);
+                if (field && field.value.trim() === '') {
+                    isValid = false;
+                }
+            });
+            
+            var submitBtn = document.getElementById('placeOrderBtn');
+            if (submitBtn) {
+                submitBtn.disabled = !isValid;
+            }
+        }
+
+        // Add validation listeners
+        var inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(function(input) {
+            input.addEventListener('input', validateForm);
+            input.addEventListener('change', validateForm);
+        });
+        
+        // Copy form data to hidden fields before submit
+        document.getElementById('placeOrderBtn').addEventListener('click', function() {
+            document.getElementById('hiddenShippingAddress').value = document.getElementById('ShippingAddress').value;
+            document.getElementById('hiddenBillingAddress').value = document.getElementById('BillingAddress').value;
+            document.getElementById('hiddenPhone').value = document.getElementById('Phone').value;
+            document.getElementById('hiddenEmail').value = document.getElementById('Email').value;
+            document.getElementById('hiddenCardNumber').value = document.getElementById('CardNumber').value;
+            document.getElementById('hiddenExpiryMonth').value = document.getElementById('ExpiryMonth').value;
+            document.getElementById('hiddenExpiryYear').value = document.getElementById('ExpiryYear').value;
+            document.getElementById('hiddenCardHolderName').value = document.getElementById('CardHolderName').value;
+            document.getElementById('hiddenCVV').value = document.getElementById('CVV').value;
+        });
+    });
+</script>

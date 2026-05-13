@@ -1,0 +1,48 @@
+@model List<Book>
+
+<h2>Books</h2>
+
+<a asp-action="Create" class="btn btn-primary">
+    Add New Book
+</a>
+
+<br />
+<br />
+
+<table border="1">
+
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var book in Model)
+{
+    <tr>
+        <td>@book.Id</td>
+        <td>@book.Title</td>
+        <td>@book.Price</td>
+
+        <td>
+
+            <a asp-action="Edit"
+               asp-route-id="@book.Id">
+               Edit
+            </a>
+
+            |
+
+            <a asp-action="Delete"
+               asp-route-id="@book.Id"
+               onclick="return confirm('Delete this book?')">
+               Delete
+            </a>
+
+        </td>
+
+    </tr>
+}
+
+</table>
